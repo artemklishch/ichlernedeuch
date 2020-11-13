@@ -48,17 +48,16 @@ export default {
     };
   },
   computed: {
+    isUserAuthenticated() {
+      return this.$store.getters.isAuthenticated;
+    },
     menuItems() {
-      return [
+      return this.isUserAuthenticated 
+      ? [
         {
           icon: "mdi-domain",
           title: "Читать",
           route: "/books",
-        },
-        {
-          icon: "mdi-message-text",
-          title: "Учить слова",
-          route: "/words",
         },
         {
           icon: "mdi-dialpad",
@@ -69,6 +68,13 @@ export default {
           icon: "mdi-export",
           title: "Выйти",
           route: "/logout",
+        },
+      ]
+      : [
+        {
+          icon: "mdi-domain",
+          title: "Читать",
+          route: "/books",
         },
         {
           icon: "mdi-arrow-up-bold-box-outline",

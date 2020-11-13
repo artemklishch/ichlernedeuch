@@ -1,10 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
-// import Books from '@components/Books'
-// import Words from "@components/Words";
-// import Signin from "@components/Signin";
-// import Signup from "@components/Signup";
 
 Vue.use(VueRouter);
 
@@ -27,31 +23,31 @@ const routes = [
     path: "/books",
     name: "Books",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/Books.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Books.vue"),
   },
   {
     path: "/words",
     name: "Words",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/Words.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Words.vue"),
   },
   {
     path: "/signin",
     name: "Signin",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/Signin.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Signin.vue"),
   },
   {
     path: "/signup",
     name: "Signup",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/Signup.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Signup.vue"),
   },
   {
     path: "/profile",
     name: "Profile",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../components/Profile.vue"),
+      import(/* webpackChunkName: "about" */ "../views/Profile.vue"),
   },
 ];
 
