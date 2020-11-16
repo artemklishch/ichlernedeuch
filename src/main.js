@@ -6,9 +6,20 @@ import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import firebaseConfig from "./config/firebase";
 import firebase from "firebase";
+import VuetifyConfirm from 'vuetify-confirm'
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify);
+Vue.use(VuetifyConfirm, {
+  Vuetify,
+  buttonTrueText: 'Да',
+  buttonFalseText: 'Нет',
+  color: 'warning',
+  icon: '!',
+  title: 'Предупреждение',
+  width: 350,
+  property: '$confirm'
+})
 
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();

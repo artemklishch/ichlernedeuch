@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import store from "../store/index";
 
 Vue.use(VueRouter);
 
@@ -44,12 +45,22 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Signup.vue"),
   },
   {
+    beforeEnter: AuthGuard,
     path: "/profile",
     name: "Profile",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/Profile.vue"),
   },
 ];
+
+function AuthGuard(from, to, next) {
+  if (store.getters.isAuthenticated) {
+    next();
+  } else {
+    next("/signin");
+  }
+
+}
 
 const router = new VueRouter({
   routes,

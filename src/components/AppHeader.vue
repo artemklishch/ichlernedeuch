@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="appheader-block">
     <v-navigation-drawer absolute temporary v-model="drawer">
       <v-list>
         <v-list-item
@@ -35,6 +35,10 @@
           <v-icon left v-html="item.icon" />
           {{ item.title }}
         </v-btn>
+        <v-btn text @click.prevent="signout" v-if="isUserAuthenticated">
+          <v-icon left v-html="'mdi-export'" />
+          Выйти
+        </v-btn>
       </v-toolbar-items>
     </v-app-bar>
   </div>
@@ -52,45 +56,58 @@ export default {
       return this.$store.getters.isAuthenticated;
     },
     menuItems() {
-      return this.isUserAuthenticated 
-      ? [
-        {
-          icon: "mdi-domain",
-          title: "Читать",
-          route: "/books",
-        },
-        {
-          icon: "mdi-dialpad",
-          title: "Мой кабинет",
-          route: "/profile",
-        },
-        {
-          icon: "mdi-export",
-          title: "Выйти",
-          route: "/logout",
-        },
-      ]
-      : [
-        {
-          icon: "mdi-domain",
-          title: "Читать",
-          route: "/books",
-        },
-        {
-          icon: "mdi-arrow-up-bold-box-outline",
-          title: "Вoйти",
-          route: "/signin",
-        },
-        {
-          icon: "mdi-minus-circle",
-          title: "Зарегистрироваться",
-          route: "/signup",
-        },
-      ];
+      return this.isUserAuthenticated
+        ? [
+            {
+              icon: "mdi-domain",
+              title: "Читать",
+              route: "/books",
+            },
+            {
+              icon: "mdi-dialpad",
+              title: "Мой кабинет",
+              route: "/profile",
+            },
+          ]
+        : [
+            {
+              icon: "mdi-domain",
+              title: "Читать",
+              route: "/books",
+            },
+            {
+              icon: "mdi-arrow-up-bold-box-outline",
+              title: "Вoйти",
+              route: "/signin",
+            },
+            {
+              icon: "mdi-minus-circle",
+              title: "Зарегистрироваться",
+              route: "/signup",
+            },
+          ];
+    },
+  },
+  methods: {
+    signout() {
+      this.$confirm("Вы действительно хотите выйти?").then((res) => {
+        res && this.$store.dispatch("SIGNOUT");
+        this.$router.push("/");
+      });
+      // this.$store.dispatch("SIGNOUT");
+      // console.log(this.$store)
     },
   },
 };
 </script>
 
-<style lang="sass" scoped>
+<style lang="scss" scoped>
+.appheader-block {
+  .theme--dark.v-btn--active:before,
+  .theme--dark.v-btn--active:hover:before,
+  .theme--dark.v-btn:hover:before,
+  .theme--dark.v-btn:focus:before {
+    opacity: 0;
+  }
+}
 </style>

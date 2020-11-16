@@ -11,17 +11,30 @@
               <v-card-title primary-title>
                 <h4>Регистрация</h4>
               </v-card-title>
-              <v-alert :value="error" type="warning">{{ error }}</v-alert>
-              <v-form>
-                <v-text-field name="email" label="E-mail" v-model="email" />
+
+              <v-alert v-if="error" type="warning">{{ error }}</v-alert>
+
+              <v-form v-model="valid">
+                <v-text-field
+                  name="email"
+                  label="E-mail"
+                  v-model="email"
+                  :rules="emailRules"
+                />
                 <v-text-field
                   name="password"
                   label="Пароль"
                   type="password"
                   v-model="password"
+                  :rules="passwordRules"
                 />
                 <v-card-actions>
-                  <v-btn primary large block @click.prevent="signup"
+                  <v-btn
+                    primary
+                    large
+                    block
+                    @click.prevent="signup"
+                    :disabled="processing || !valid"
                     >Зарегистрироваться</v-btn
                   >
                 </v-card-actions>
@@ -40,6 +53,20 @@ export default {
     return {
       password: null,
       email: null,
+      valid: false,
+      emailRules: [
+        (v) => !!v || "Пожалуйста введите email",
+        (v) =>
+          /^([a-z0-9_-]+\.)*[a-z0-9_-]+@[a-z0-9_-]+(\.[a-z0-9_-]+)*\.[a-z]{2,6}$/.test(
+            v
+          ) || "Неправильный email",
+      ],
+      passwordRules: [
+        (v) => !!v || "Пожалуйста введите email",
+        (v) =>
+          (v && v.length >= 6) ||
+          "Пароль слишком короткий - минимум 6 символов",
+      ],
     };
   },
   computed: {
