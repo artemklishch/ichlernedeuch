@@ -9,7 +9,7 @@ export default {
         parts: 7,
         level: ["B2", "C1"],
         rating: 4,
-        ratingCount: 1,
+        ratingCount: 100,
         youtube_playlist_id: "sdfsadf678sadfsdf",
       },
       {
