@@ -6,20 +6,22 @@ import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import firebaseConfig from "./config/firebase";
 import firebase from "firebase";
-import VuetifyConfirm from 'vuetify-confirm'
+import VuetifyConfirm from "vuetify-confirm";
+import VueYouTubeEmbed from "vue-youtube-embed";
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify);
+Vue.use(VueYouTubeEmbed);
 Vue.use(VuetifyConfirm, {
   Vuetify,
-  buttonTrueText: 'Да',
-  buttonFalseText: 'Нет',
-  color: 'warning',
-  icon: '!',
-  title: 'Предупреждение',
+  buttonTrueText: "Да",
+  buttonFalseText: "Нет",
+  color: "warning",
+  icon: "!",
+  title: "Предупреждение",
   width: 350,
-  property: '$confirm'
-})
+  property: "$confirm",
+});
 
 firebase.initializeApp(firebaseConfig);
 // firebase.analytics();
@@ -42,7 +44,7 @@ new Vue({
         // var uid = user.uid;
         // var providerData = user.providerData;
         // ...
-        vm.$store.dispatch('STATE_CHANGED', user);
+        vm.$store.dispatch("STATE_CHANGED", user);
       } else {
         // User is signed out.
         // ...
@@ -50,3 +52,4 @@ new Vue({
     });
   },
 }).$mount("#app");
+

@@ -27,6 +27,20 @@ const routes = [
       import(/* webpackChunkName: "about" */ "../views/Books.vue"),
   },
   {
+    path: "/book/:id",
+    name: "Book",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/Book.vue"),
+  },
+  {
+    path: "/book/:bookId/part/:partId",
+    name: "BookPart",
+    props: true,
+    component: () =>
+      import(/* webpackChunkName: "about" */ "../views/BookPart.vue"),
+  },
+  {
     path: "/words",
     name: "Words",
     component: () =>
@@ -59,7 +73,6 @@ function AuthGuard(from, to, next) {
   } else {
     next("/signin");
   }
-
 }
 
 const router = new VueRouter({
