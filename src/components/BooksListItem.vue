@@ -3,10 +3,7 @@
     <v-container fluid>
       <v-layout row class="hidden-sm-and-down">
         <v-flex xs4 md3>
-          <v-img
-            src="https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/original/products/84605/93507/Harry-Potter-and-the-philosophers-stone-original-movie-poster-buy-now-at-starstills__45891.1577476239.jpg?c=2"
-            height="100"
-          />
+          <v-img :src="book.imageUrl" height="100" />
           <div class="d-flex justify-center">
             <v-btn text color="white">
               <v-icon left>mdi-antenna</v-icon>YouTube
@@ -26,7 +23,7 @@
             </div>
           </v-card-title>
           <v-card-actions>
-            <v-rating
+            <!-- <v-rating
               v-model="book.rating"
               color="yellow"
               readonly
@@ -36,7 +33,7 @@
             <div class="ml-1">
               <span>{{ book.rating }}</span>
               <span>({{ book.ratingCount }})</span>
-            </div>
+            </div> -->
             <v-spacer />
             <v-btn
               class="primary"
@@ -51,10 +48,7 @@
       <div class="hidden-md-and-up">
         <v-layout row>
           <v-flex xs4 md3>
-            <v-img
-              src="https://cdn11.bigcommerce.com/s-ydriczk/images/stencil/original/products/84605/93507/Harry-Potter-and-the-philosophers-stone-original-movie-poster-buy-now-at-starstills__45891.1577476239.jpg?c=2"
-              height="100"
-            />
+            <v-img src="book.imageUrl" height="100" />
           </v-flex>
           <v-flex xs8 md9>
             <v-card-title>
@@ -88,7 +82,7 @@
         <v-layout row>
           <v-flex xs12>
             <v-card-actions>
-              <v-rating
+              <!-- <v-rating
                 v-model="book.rating"
                 color="yellow"
                 readonly
@@ -98,7 +92,7 @@
               <div class="ml-1">
                 <span>{{ book.rating }}</span>
                 <span>({{ book.ratingCount }})</span>
-              </div>
+              </div> -->
               <v-spacer />
               <v-btn
                 class="primary"

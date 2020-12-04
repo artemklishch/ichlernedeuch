@@ -1,7 +1,7 @@
 <template>
   <v-container grid-list-md>
     <v-layout row wrap>
-      <v-flex xs12 sm10 md8 offset-sm1 offset-md-2>
+      <v-flex xs12 sm10 md8 offset-sm2 offset-md-2>
         <v-container fluid>
           <v-layout row>
             <v-flex xs7 md8>
@@ -24,7 +24,7 @@
         xs12
         sm10
         md8
-        offset-sm1
+        offset-sm2
         offset-md-2
       >
         <BooksListItem :book="book" />

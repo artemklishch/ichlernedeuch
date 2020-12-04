@@ -6,6 +6,7 @@ import Vuetify from "vuetify";
 import "vuetify/dist/vuetify.min.css";
 import firebaseConfig from "./config/firebase";
 import firebase from "firebase";
+import "firebase/firestore";
 import VuetifyConfirm from "vuetify-confirm";
 import VueYouTubeEmbed from "vue-youtube-embed";
 
@@ -23,8 +24,14 @@ Vue.use(VuetifyConfirm, {
   property: "$confirm",
 });
 
-firebase.initializeApp(firebaseConfig);
+const firebaseApp = firebase.initializeApp(firebaseConfig);
+const db = firebaseApp.firestore();
+db.settings({
+  timestampsInSnapshots: true,
+});
 // firebase.analytics();
+
+Vue.$db = db;
 
 new Vue({
   router,
@@ -50,6 +57,6 @@ new Vue({
         // ...
       }
     });
+    this.$store.dispatch("LOAD_BOOKS");
   },
 }).$mount("#app");
-
