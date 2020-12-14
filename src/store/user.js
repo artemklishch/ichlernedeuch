@@ -50,19 +50,21 @@ export default {
           commit("SET_ERROR", error.message);
         });
     },
-    SIGNOUT({commit}) {
+    SIGNOUT({ commit }) {
       // firebase.auth().signOut();
-      commit('UNSET_USER');
+      commit("UNSET_USER");
     },
-    STATE_CHANGED({ commit }, payload) {
+    STATE_CHANGED({ commit, dispatch }, payload) {
       if (payload) {
         commit("SET_USER", payload.uid);
+        dispatch("LOAD_USER_DATA", payload.uid);
       } else {
         commit("UNSET_USER");
       }
     },
   },
   getters: {
+    userIdGetter: (state) => state.user.uid,
     isAuthenticated: (state) => state.user.isAuthenticated,
   },
 };

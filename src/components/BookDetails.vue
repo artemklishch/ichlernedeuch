@@ -35,7 +35,17 @@
               <span>({{ book.ratingCount }})</span>
             </div> -->
             <v-spacer />
-            <v-btn class="primary" text>Загрузить</v-btn>
+            <v-btn
+              class="primary"
+              text
+              v-if="canLoadBook(book.id)"
+              @click="loadBook(book.id)"
+              >Загрузить</v-btn
+            >
+            <div v-if="getUserDataBook(book.id)">
+            <v-icon color="white">mdi-calendar-weekend-outline</v-icon>
+            Книга скачана {{ getBookAddedDate(book.id) }}
+          </div>
           </v-card-actions>
         </v-flex>
       </v-layout>
@@ -89,7 +99,13 @@
                 <span>({{ book.ratingCount }})</span>
               </div> -->
               <v-spacer />
-              <v-btn class="primary" text>Загрузить</v-btn>
+              <v-btn
+                class="primary"
+                text
+                v-if="canLoadBook(book.id)"
+                @click="loadBook(book.id)"
+                >Загрузить</v-btn
+              >
             </v-card-actions>
           </v-flex>
         </v-layout>
@@ -100,6 +116,8 @@
 
 <script>
 import * as bookHelpers from "../helpers/book";
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     book: {
@@ -107,8 +125,25 @@ export default {
       required: true,
     },
   },
+  computed: {
+    ...mapGetters(["isAuthenticated", "userData", "getProcessing"]),
+  },
   methods: {
     getBookLevel: bookHelpers.getBookLevel,
+    canLoadBook(bookId) {
+      const book = this.getUserDataBook(bookId);
+      return this.isAuthenticated && !this.getProcessing && !book;
+    },
+    getUserDataBook(bookId) {
+      return this.userData.books[bookId];
+    },
+    loadBook(bookId) {
+      this.$store.dispatch("ADD_USER_BOOK", bookId);
+    },
+    getBookAddedDate(bookId) {
+      const book = this.getUserDataBook(bookId);
+      return book.addedDate.toLocaleDateString();
+    },
   },
 };
 </script>

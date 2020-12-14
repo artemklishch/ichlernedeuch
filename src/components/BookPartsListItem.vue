@@ -10,6 +10,7 @@
           text
           class="primary"
           :to="{ name: 'BookPart', params: { bookId, partId: part.id } }"
+          v-if="isUserBookLoaded"
           >Открыть</v-btn
         >
       </v-card-actions>
@@ -18,6 +19,8 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   props: {
     part: {
@@ -26,6 +29,16 @@ export default {
     },
     bookId: {
       required: true,
+    },
+  },
+  computed: {
+    ...mapGetters(["isAuthenticated", "userData", "getProcessing"]),
+    isUserBookLoaded() {
+      return (
+        this.isAuthenticated &&
+        !this.getProcessing &&
+        this.userData.books[this.bookId]
+      );
     },
   },
 };
