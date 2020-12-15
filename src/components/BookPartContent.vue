@@ -110,7 +110,6 @@ export default {
   created() {
     for (var i = 0; i < this.part.content.length; i++) {
       for (var y = 0; y < this.part.content[i].sentences.length; y++) {
-        console.log(this.part.content[i].sentences[y]);
         this.visibilityKeys.push({
           key: `${i}${y}`,
           value: false,

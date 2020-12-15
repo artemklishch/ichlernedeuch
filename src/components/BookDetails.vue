@@ -44,7 +44,7 @@
             >
             <div v-if="getUserDataBook(book.id)">
             <v-icon color="white">mdi-calendar-weekend-outline</v-icon>
-            Книга скачана {{ getBookAddedDate(book.id) }}
+            Книга скачана {{ getBookAddedDate(book.id) | formatedDate }}
           </div>
           </v-card-actions>
         </v-flex>
@@ -142,7 +142,7 @@ export default {
     },
     getBookAddedDate(bookId) {
       const book = this.getUserDataBook(bookId);
-      return book.addedDate.toLocaleDateString();
+      return book.addedDate;
     },
   },
 };
